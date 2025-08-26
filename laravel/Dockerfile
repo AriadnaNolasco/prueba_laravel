@@ -16,7 +16,7 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Copiar archivos del proyecto
 WORKDIR /app
-COPY . .
+COPY ./laravel .
 
 # Instalar dependencias de Laravel
 RUN composer install --no-dev --optimize-autoloader
@@ -31,3 +31,4 @@ EXPOSE 10000
 
 # Comando para iniciar Laravel
 CMD php artisan serve --host 0.0.0.0 --port 10000
+
