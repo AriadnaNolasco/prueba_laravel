@@ -18,6 +18,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY ./laravel .
 
+RUN mkdir -p bootstrap/cache \
+    && chmod -R 775 bootstrap/cache \
+    && chown -R www-data:www-data bootstrap/cache
+
 # Instalar dependencias de Laravel
 RUN composer install --no-dev --optimize-autoloader
 
@@ -31,4 +35,5 @@ EXPOSE 10000
 
 # Comando para iniciar Laravel
 CMD php artisan serve --host 0.0.0.0 --port 10000
+
 
